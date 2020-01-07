@@ -12,6 +12,7 @@
 
     <modules>
         <module>nio-about</module>
+        <module>itext-pdf</module>
     </modules>
 
     <properties>
