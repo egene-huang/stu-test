@@ -40,8 +40,8 @@ public class PDFWriterWaterMark {
         PdfDocument pdfDoc = new PdfDocument(new PdfReader(dest), new PdfWriter(desc_mark));
         Document doc = new Document(pdfDoc);
         int n = pdfDoc.getNumberOfPages();
-//        PdfFont font = FontUtil.STSong_Light;
-        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+        PdfFont font = FontUtil.SIMHEI;
+//        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
         Paragraph p = new Paragraph("huangyijun6").setFont(font).setFontSize(30);
         // image watermark
         ImageData img = ImageDataFactory.create(imgUrl);

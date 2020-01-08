@@ -28,6 +28,7 @@ public class PDFWriter {
         PdfFont font = FontUtil.SIMHEI;
 //        PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_OBLIQUE);
         table.setFont(font);
+        table.setFontSize(12f);
         table.addHeaderCell("SKU_ID");
         table.addHeaderCell("商品名称");
         table.addHeaderCell("价格");

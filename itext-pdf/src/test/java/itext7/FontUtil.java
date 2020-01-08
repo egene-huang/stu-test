@@ -13,11 +13,14 @@ public class FontUtil {
     public static PdfFont STSong_Light;
     public static PdfFont MHei_Medium;
     public static PdfFont SIMHEI;
+    public static PdfFont DroidSans;
+    public static PdfFont HYS1GFM;
+    public static PdfFont simsunb;
     static {
         try {
             STSong_Light = PdfFontFactory.createFont("STSong-Light", "UniGB-UCS2-H",true);
-            MHei_Medium = PdfFontFactory.createFont("MHei-Medium", "UniCNS-UCS2-H", true);
-            SIMHEI = PdfFontFactory.createFont("src/test/resources/simhei.ttf", PdfEncodings.IDENTITY_H,true);
+            SIMHEI = PdfFontFactory.createFont("src/test/resources/fonts/simhei.ttf", PdfEncodings.IDENTITY_H,true);
+            simsunb = PdfFontFactory.createFont("src/test/resources/fonts/simsunb.ttf", PdfEncodings.IDENTITY_H,true);
         }catch (Exception e) {
             e.printStackTrace();
         }
