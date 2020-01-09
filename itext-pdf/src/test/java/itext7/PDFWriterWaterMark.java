@@ -50,7 +50,7 @@ public class PDFWriterWaterMark {
         float h = img.getHeight();
         // transparency
         PdfExtGState gs1 = new PdfExtGState();
-        gs1.setFillOpacity(0.3f);
+        gs1.setFillOpacity(0.15f);
         // properties
         PdfCanvas over;
         Rectangle pagesize;
@@ -84,6 +84,7 @@ public class PDFWriterWaterMark {
             over.addImage(img, w, 0, 0, h, x - (w / 2), y - (h / 2), true);
             over.restoreState();
         }
+        pdfDoc.close();
         doc.close();
     }
 }
