@@ -2,6 +2,7 @@ package itext7;
 
 import com.itextpdf.io.font.otf.GlyphLine;
 import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.color.DeviceRgb;
 import com.itextpdf.kernel.events.Event;
 import com.itextpdf.kernel.events.IEventHandler;
 import com.itextpdf.kernel.events.PdfDocumentEvent;
@@ -12,9 +13,9 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.AreaBreak;
-import com.itextpdf.layout.element.LineSeparator;
-import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.element.*;
+import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 import org.junit.Test;
 
@@ -45,17 +46,20 @@ public class PDFWriterHeaderAndFooter {
         ls.setMarginBottom(15);
         doc.add(ls);
         pdfDoc.addEventHandler(PdfDocumentEvent.END_PAGE, new RightFooter("jdprice-beta.jd.com", doc));
-        Table table = new Table(UnitValue.createPercentArray(new float[]{3,3,3})).useAllAvailableWidth();
+//        Table table = new Table(UnitValue.createPercentArray(new float[]{1,1,1})).useAllAvailableWidth();
+        Table table = new Table(UnitValue.createPointArray(new float[]{4f,5f,3f}));
+//        table.setWidth(100f);
+        table.setFixedLayout();
         table.addHeaderCell("SKU_ID");
         table.addHeaderCell("SKU_Name");
         table.addHeaderCell("Price");
-        for (int i = 1; i < 3; i++) {
-            table.addCell("53629479041" + i);
-            table.addCell("HUAWEI M Phone " + i);
-            table.addCell(2099 + i + ".00");
-        }
-        doc.add(table);
-        doc.add(new AreaBreak());
+        /*for (int i = 1; i < 3; i++) {
+            table.addCell(new Cell().add("53629479041" + i).setWidth(1f));
+            table.addCell(new Cell().add("HUAWEI M Phone " + i).setWidth(1f));
+            table.addCell(new Cell().add(2099 + i + ".00").setWidth(1f));
+        }*/
+//        doc.add(table);
+//        doc.add(new AreaBreak());
         for (int i = 1; i < 3; i++) {
             table.addCell("53629479041" + i);
             table.addCell("HUAWEI M Phone " + i);

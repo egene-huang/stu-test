@@ -1,12 +1,17 @@
 package itext7;
 
 import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.color.DeviceCmyk;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.DashedBorder;
+import com.itextpdf.layout.border.GrooveBorder;
+import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
@@ -26,9 +31,10 @@ public class PDFWriter {
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(dest));
         Document doc = new Document(pdfDoc, PageSize.A3);
 //        Table table = new Table(UnitValue.createPointArray(new float[]{3,3,3})).useAllAvailableWidth();
-        Table table = new Table(UnitValue.createPointArray(new float[]{4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,6,4})).useAllAvailableWidth();
+        Table table = new Table(UnitValue.createPercentArray(new float[]{4,4,4,4,4,4,4,4,4,4,4,4,4,4,6,6,4})).useAllAvailableWidth();
 //        table = new Table(UnitValue.createPercentValue(100)).useAllAvailableWidth();
-        table = new Table(new float[17]);
+//        table = new Table(new float[17]);
+        table.setFixedLayout();
         PdfFont font = FontUtil.SIMHEI;
 //        PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER_OBLIQUE);
 //        table.setFont(font);
@@ -37,7 +43,8 @@ public class PDFWriter {
         table.addHeaderCell(new Paragraph("商品名称").setFont(font));
         table.addHeaderCell(new Paragraph("价格").setFont(font));*/
 
-        table.setAutoLayout();
+//        table.setAutoLayout();
+//        table.setBorder(new GrooveBorder(DeviceCmyk.BLACK, 0.5f));
         table.addHeaderCell("skuID");
         table.addHeaderCell(new Paragraph("事业群").setFont(font));
         table.addHeaderCell(new Paragraph("事业部").setFont(font));
