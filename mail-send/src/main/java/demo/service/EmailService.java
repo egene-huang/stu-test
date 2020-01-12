@@ -1,6 +1,6 @@
-package service;
+package demo.service;
 
-import model.SendEmailModel;
+import demo.model.SendEmailModel;
 
 /**
  * <br/>

@@ -1,6 +1,4 @@
-package util;
-
-import java.util.concurrent.Executor;
+package demo.util;
 
 /**
  * 定义异步任务执行线程池

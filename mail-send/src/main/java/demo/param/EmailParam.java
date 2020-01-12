@@ -1,4 +1,4 @@
-package param;
+package demo.param;
 
 /**
  * 邮箱发送参数配置

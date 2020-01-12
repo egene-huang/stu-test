@@ -1,6 +1,6 @@
-package util;
+package demo.util;
 
-import param.EmailParam;
+import demo.param.EmailParam;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;

@@ -1,4 +1,4 @@
-package param;
+package demo.param;
 
 /**
  * 邮件发送类型

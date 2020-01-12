@@ -1,4 +1,4 @@
-package model;
+package demo.model;
 
 /**
  * 邮件发送参数封装
