@@ -1,5 +1,9 @@
 package mail.client.context;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Properties;
 
 /**
@@ -7,7 +11,9 @@ import java.util.Properties;
  * User: eugene <br/>
  * Date&Time: 2020/1/12 16:38
  */
-public interface ClientContext {
+@Getter
+@Setter(value = AccessLevel.PRIVATE)
+public class ClientContext {
 
     /**
      * 邮箱服务器地址
@@ -27,46 +33,56 @@ public interface ClientContext {
     String C_USER = "mail.user";
 
     /**
-     * 获取服务地址
-     * @param host
+     * 邮箱服务器地址
      */
-    ClientContext host(String host);
-
-
+    private String host;
     /**
      * 协议
-     * @param protocol
-     * @return ClientContext
      */
-    ClientContext protocol(String protocol);
+    private String protocol;
 
+    /**
+     * sender
+     */
+    private String sender;
+
+    /**
+     * 发送人昵称
+     */
+    private String nick;
 
     /**
      * 授权
-     * @param auth
-     * @return ClientContext
      */
-    ClientContext auth(boolean auth);
+    private Boolean auth;
 
     /**
-     * 设置title
-     * @param title
-     * @return ClientContext
+     * 密码
      */
-    ClientContext title(String title);
+    private String password;
 
     /**
-     * 设置邮件内容
-     * @param content
-     * @return ClientContext
+     * title
      */
-    ClientContext content(String content);
+    private String title;
+
+    /**
+     * content
+     */
+    private String content;
 
 
     /**
-     *
-     * @return
+     * 属性
      */
-    Properties prop();
+    final Properties prop = new Properties();
+
+
+    public ClientContext build() {
+        prop.setProperty(C_HOST, this.host);
+        prop.setProperty(C_PROTOCOL, this.protocol);
+        prop.setProperty(C_AUTH, this.auth.toString());
+        return this;
+    }
 
 }
