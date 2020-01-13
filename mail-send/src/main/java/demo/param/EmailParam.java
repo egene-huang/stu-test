@@ -24,7 +24,7 @@ public class EmailParam {
     /**
      * 邮箱授权码
      */
-    public static final String password = "201288sina";
+    public static final String password = "12345678";
     /**
      * 邮箱授权
      */
