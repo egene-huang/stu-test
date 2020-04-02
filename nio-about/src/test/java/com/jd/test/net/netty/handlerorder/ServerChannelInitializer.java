@@ -15,10 +15,11 @@ public class ServerChannelInitializer extends ChannelInitializer<SocketChannel> 
     protected void initChannel(SocketChannel ch) throws Exception {
         ch.pipeline().addLast(new StringDecoder());
         ch.pipeline().addLast(new ServerInboundHander1());
-        ch.pipeline().addLast(new StringDecoder());
-        ch.pipeline().addLast(new ServerInboundHander2());
         ch.pipeline().addLast(new StringEncoder());
-        ch.pipeline().addLast(new ServerOutboundHandler1());
-        ch.pipeline().addLast(new ServerOutboundHandler2());
+//        ch.pipeline().addLast(new StringDecoder());
+//        ch.pipeline().addLast(new ServerInboundHander2());
+//        ch.pipeline().addLast(new StringEncoder());
+//        ch.pipeline().addLast(new ServerOutboundHandler1());
+//        ch.pipeline().addLast(new ServerOutboundHandler2());
     }
 }

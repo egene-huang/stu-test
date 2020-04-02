@@ -14,6 +14,7 @@
         <module>nio-about</module>
         <module>itext-pdf</module>
         <module>mail-send</module>
+        <module>log-about</module>
     </modules>
 
     <properties>

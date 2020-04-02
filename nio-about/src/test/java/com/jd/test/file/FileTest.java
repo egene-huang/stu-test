@@ -2,6 +2,8 @@ package com.jd.test.file;
 
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,5 +21,19 @@ public class FileTest {
         Path tempPdf = Files.createTempFile(Paths.get(temp.toURI()), "temp_pdf", ".txt");
         boolean exists = Files.exists(tempPdf);
         System.out.println(exists);
+    }
+
+
+    @Test
+    public void test() throws Exception {
+        /*File file = File.createTempFile("activity_huangyijun6_759440_1_1", ".xlsx");
+        System.out.println("fileName: " + file.getName());
+        Files.deleteIfExists(file.toPath());*/
+//        File file = new File("xxx/xxx/xx.xlsx");
+//        FileOutputStream outputStream = new FileOutputStream(file);
+//        System.out.println("文件创建成功， name: " + file.getName());
+        String str = "文件创建成功";
+        String newstr = new String(str.getBytes("utf-8"), "utf-8");
+        System.out.println("中文: " + newstr);
     }
 }

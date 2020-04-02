@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="30"
+               status="off"
+               name="RoutingTest"
+               packages="log.slf4j.demo.maker.clszz.onep">
+    <Properties>
+        <Property name="filename">rollingtest-${sys:type}.log</Property>
+    </Properties>
+    <ThresholdFilter level="debug"/>
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout pattern="%m%n"/>
+            <ThresholdFilter level="debug"/>
+        </Console>
+        <Routing name="Routing">
+            <Routes pattern="$${sd:type}">
+                <Route>
+                    <RollingFile name="Rolling-${sys:type}" fileName="${filename}"
+                                 filePattern="test1-${sys:type}.%i.log.gz">
+                        <PatternLayout>
+                            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+                        </PatternLayout>
+                        <SizeBasedTriggeringPolicy size="500"/>
+                    </RollingFile>
+                </Route>
+                <Route ref="STDOUT" key="Audit"/>
+            </Routes>
+        </Routing>
+    </Appenders>
+    <Loggers>
+        <Logger name="EventLogger" level="info" additivity="false">
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="log.slf4j.demo" level="ERROR" additivity="true">
+<!--        <Logger name="log.slf4j.demo" level="${sys:level}" additivity="true">-->
+            <AppenderRef ref="Routing"/>
+        </Logger>
+
+<!--        <Root level="error">-->
+        <Root level="error">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

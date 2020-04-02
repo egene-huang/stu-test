@@ -15,8 +15,13 @@ public class ServerInboundHander1 extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String serverInboundHander1 = "ServerInboundHander1";
-        System.out.println(serverInboundHander1 + "收到消息!");
-        ctx.fireChannelRead(Unpooled.copiedBuffer(serverInboundHander1 + ", " + msg.toString(), CharsetUtil.UTF_8));
+        System.out.println(serverInboundHander1 + "收到消息! => " + msg.toString());
+//        ctx.fireChannelRead(Unpooled.copiedBuffer(serverInboundHander1 + ", " + msg.toString(), CharsetUtil.UTF_8));
+
+        //是从当前节点开始找第一个outboundHandler
+//        ctx.writeAndFlush(msg);
+        //写-outxxx  pipeline是从tail开始
+        ctx.pipeline().writeAndFlush(msg);
     }
 
     @Override
