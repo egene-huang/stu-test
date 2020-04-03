@@ -8,6 +8,13 @@
     </Properties>
     <ThresholdFilter level="debug"/>
     <Appenders>
+        <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+<!--        <RandomAccessFile name="RandomAccessFile" fileName="async.log" immediateFlush="false" append="false">-->
+        <RandomAccessFile name="RandomAccessFile" fileName="${filename}" immediateFlush="false" append="false">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m %ex%n %marker</Pattern>
+            </PatternLayout>
+        </RandomAccessFile>
         <Console name="STDOUT">
             <PatternLayout pattern="%m%n"/>
             <ThresholdFilter level="debug"/>
@@ -31,9 +38,10 @@
         <Logger name="EventLogger" level="info" additivity="false">
             <AppenderRef ref="Routing"/>
         </Logger>
-        <Logger name="log.slf4j.demo" level="ERROR" additivity="true">
+        <Logger name="log.slf4j.demo" level="ERROR" additivity="true" includeLocation="false">
 <!--        <Logger name="log.slf4j.demo" level="${sys:level}" additivity="true">-->
-            <AppenderRef ref="Routing"/>
+<!--            <AppenderRef ref="Routing"/>-->
+            <AppenderRef ref="RandomAccessFile"/>
         </Logger>
 
 <!--        <Root level="error">-->
