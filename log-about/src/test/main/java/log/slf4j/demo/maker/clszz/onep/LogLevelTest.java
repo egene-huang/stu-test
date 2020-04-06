@@ -21,23 +21,18 @@ public class LogLevelTest {
         System.setProperty("type", "25");
 //        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
         //DEBUG < INFO < WARN < ERROR < FATAL
+        //危险级别越高 值越小
         Class<? extends LogLevelTest> aClass = getClass();
         Logger logger = LoggerFactory.getLogger(aClass);
         logger.info("info => hello," + aClass.getName());
         logger.warn("warn => hello," + aClass.getName());
         logger.error("erro => hello," + aClass.getName());
 //        logger.error(marker, "error => hello, " + aClass.getName());
-        Marker marker = MarkerFactory.getMarker("Marker测试:");
-        logger.error(marker, "error => hello," + aClass.getName());
+//        Marker marker = MarkerFactory.getMarker("Marker测试:");
+//        logger.error(marker, "marker-error => hello," + aClass.getName());
         logger.debug("debug => hello," + aClass.getName());
         System.out.println("--------------------------------------------------------");
 //        Configurator.setLevel(aClass.getName(), Level.DEBUG);
-        Configurator.setRootLevel(Level.DEBUG);
-        /*while (true){
-            logger.info("changed::info => hello," + aClass.getName());
-            logger.warn("changed::warn => hello," + aClass.getName());
-            logger.error("changed::erro => hello," + aClass.getName());
-            logger.debug("changed::debug => hello," + aClass.getName());
-        }*/
+//        Configurator.setRootLevel(Level.DEBUG);
     }
 }
