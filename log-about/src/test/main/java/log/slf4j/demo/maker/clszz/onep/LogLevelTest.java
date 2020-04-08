@@ -1,8 +1,7 @@
 package log.slf4j.demo.maker.clszz.onep;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.MarkerManager;
-import org.apache.logging.log4j.core.config.Configurator;
+import lombok.Data;
+import org.apache.logging.log4j.message.ObjectMessage;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,7 @@ public class LogLevelTest {
 //        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
         //DEBUG < INFO < WARN < ERROR < FATAL
         //危险级别越高 值越小
+        Marker test = MarkerFactory.getMarker("Test");
         Class<? extends LogLevelTest> aClass = getClass();
         Logger logger = LoggerFactory.getLogger(aClass);
         logger.info("info => hello," + aClass.getName());
@@ -31,8 +31,27 @@ public class LogLevelTest {
 //        Marker marker = MarkerFactory.getMarker("Marker测试:");
 //        logger.error(marker, "marker-error => hello," + aClass.getName());
         logger.debug("debug => hello," + aClass.getName());
+        logger.error(test, "objmsg: {}", new ObjectMessage(new Person("测试", 25)));
         System.out.println("--------------------------------------------------------");
 //        Configurator.setLevel(aClass.getName(), Level.DEBUG);
 //        Configurator.setRootLevel(Level.DEBUG);
+    }
+
+    @Data
+    static class Person {
+        private String name;
+        private int age;
+        public Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return "Person{" +
+                    "name='" + name + '\'' +
+                    ", age=" + age +
+                    '}';
+        }
     }
 }

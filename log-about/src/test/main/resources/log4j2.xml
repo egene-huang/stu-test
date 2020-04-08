@@ -8,68 +8,31 @@
     </Properties>
     <!--全局filter-->
     <Filters>
-       <!-- <MarkerFilter marker="EVENT" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
-        <DynamicThresholdFilter key="loginId" defaultThreshold="ERROR"
-                                onMatch="ACCEPT" onMismatch="NEUTRAL">
-            <KeyValuePair key="User1" value="DEBUG"/>
-        </DynamicThresholdFilter>-->
-        <!--<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
-        <!--<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
-        <!--<ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>-->
-        <!--<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>-->
-
-        <!--<FixedFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
-        <!--<FixedFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
-        <!--<FixedFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>-->
-        <!--<FixedFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>-->
-
-
-        <!--<LevelRangeFilter minLevel="DEBUG" maxLevel="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>-->
         <FlexibleLevelRangeFilter minLevel="ERROR" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
     </Filters>
     <Appenders>
         <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
-        <!--        <RandomAccessFile name="RandomAccessFile" fileName="async.log" immediateFlush="false" append="false">-->
         <RandomAccessFile name="RandomAccessFile" fileName="${filename}" immediateFlush="false" append="false">
             <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
+                <Pattern>%d{dd MMM HH:mm:ss} %p %c{-10} [%t] %m %ex%n</Pattern>
             </PatternLayout>
         </RandomAccessFile>
         <Console name="STDOUT">
-            <PatternLayout pattern="%m%n"/>
-            <ThresholdFilter level="debug"/>
+<!--            <PatternLayout pattern="%m%n"/>-->
+            <PatternLayout>
+                <pattern>%d{MM-dd HH:mm:ss} %t[%p][%F:%L]%marker - %m%n</pattern>
+            </PatternLayout>
         </Console>
 
-        <!--<Routing name="Routing">
-            <Routes pattern="$${sd:type}">
-                <Route>
-                    <RollingFile name="Rolling-${sys:type}" fileName="${filename}"
-                                 filePattern="test1-${sys:type}.%i.log.gz">
-                        &lt;!&ndash;局部filter&ndash;&gt;
-                        <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
-                        <PatternLayout>
-                            <pattern>%d %p %c{1.} [%t] %m%n</pattern>
-                        </PatternLayout>
-                        <SizeBasedTriggeringPolicy size="500"/>
-                    </RollingFile>
-                </Route>
-                <Route ref="STDOUT" key="Audit"/>
-            </Routes>
-        </Routing>-->
         <RollingFile name="RollingFile" fileName="logs/app.log"
                      filePattern="logs/app-%d{MM-dd-yyyy}.log.gz">
-            <!--<ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>-->
-            <!--<FixedFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>-->
             <PatternLayout>
-                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+                <pattern>%d{MM-dd HH:mm:ss} %t[%p]%c{-10}%marker %m%n</pattern>
             </PatternLayout>
             <TimeBasedTriggeringPolicy/>
         </RollingFile>
     </Appenders>
     <Loggers>
-        <!--<Logger name="EventLogger" level="info" additivity="false">
-            <AppenderRef ref="Routing"/>
-        </Logger>-->
         <!--logger不要有自己的level 参考filter-->
         <Logger name="log.slf4j.demo" additivity="true" includeLocation="false">
             <!--        <Logger name="log.slf4j.demo" level="${sys:level}" additivity="true">-->
@@ -77,7 +40,6 @@
             <!--<AppenderRef ref="RandomAccessFile"/>-->
         </Logger>
 
-        <!--        <Root level="error">-->
         <Root level="error">
             <AppenderRef ref="STDOUT"/>
         </Root>
